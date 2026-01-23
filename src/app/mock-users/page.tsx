@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import {auth ,currentUser} from "@clerk/nextjs/server";
 
 type MockUsers = {
     id: number;
@@ -27,6 +28,12 @@ export default async function MockUsers() {
         revalidatePath('/mock-users');
         console.log('New User Added:', newUser);
     }
+
+    const authObj = await auth();
+    const userObj = await currentUser();
+    console.log("Auth Object:", authObj);
+    console.log("Current User Object:", userObj);
+    
     return (
         <div className="py-10">
             <form className="mb-4" action={addUser}>

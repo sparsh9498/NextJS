@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import path from "path";
+import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { Sign } from "crypto";
 
 export default function Navigation() {
     const pathname = usePathname();
@@ -13,7 +15,12 @@ export default function Navigation() {
             {/* 
                     <Link href="/forgot-password">Forgot Password</Link>
                  */}
-
-        </nav>
+            <SignedOut>
+                <SignInButton mode="modal" />
+            </SignedOut>
+            <SignedIn>
+                <UserButton />
+            </SignedIn>
+        </nav >
     );
 }
